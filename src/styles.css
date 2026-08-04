@@ -1,0 +1,147 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — Canal de Denuncias Seguras INPPARES.
+ * Institutional, trustworthy: deep teal + slate, warm amber for advisories.
+ * All colors in oklch, all tokens semantic.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-deep: var(--primary-deep);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-surface: var(--warning-surface);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --shadow-card: 0 1px 2px oklch(0.3 0.05 210 / 6%), 0 12px 32px -18px oklch(0.3 0.05 210 / 28%);
+  --shadow-elevated: 0 24px 60px -28px oklch(0.3 0.06 210 / 38%);
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.985 0.006 200);
+  --foreground: oklch(0.24 0.03 232);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.24 0.03 232);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.24 0.03 232);
+  --primary: oklch(0.49 0.093 208);
+  --primary-foreground: oklch(0.985 0.006 200);
+  --primary-deep: oklch(0.31 0.062 227);
+  --secondary: oklch(0.949 0.017 205);
+  --secondary-foreground: oklch(0.34 0.055 220);
+  --muted: oklch(0.958 0.01 210);
+  --muted-foreground: oklch(0.52 0.028 227);
+  --accent: oklch(0.93 0.045 190);
+  --accent-foreground: oklch(0.31 0.062 227);
+  --destructive: oklch(0.55 0.196 25);
+  --destructive-foreground: oklch(0.985 0.006 200);
+  --warning: oklch(0.66 0.152 62);
+  --warning-foreground: oklch(0.34 0.09 55);
+  --warning-surface: oklch(0.966 0.038 82);
+  --success: oklch(0.56 0.113 158);
+  --success-foreground: oklch(0.985 0.006 200);
+  --border: oklch(0.905 0.014 215);
+  --input: oklch(0.888 0.016 215);
+  --ring: oklch(0.49 0.093 208);
+  --gradient-hero: linear-gradient(
+    160deg,
+    oklch(0.31 0.062 227) 0%,
+    oklch(0.4 0.084 213) 55%,
+    oklch(0.49 0.093 195) 100%
+  );
+}
+
+.dark {
+  --background: oklch(0.19 0.028 232);
+  --foreground: oklch(0.96 0.008 210);
+  --card: oklch(0.24 0.032 230);
+  --card-foreground: oklch(0.96 0.008 210);
+  --popover: oklch(0.24 0.032 230);
+  --popover-foreground: oklch(0.96 0.008 210);
+  --primary: oklch(0.72 0.096 195);
+  --primary-foreground: oklch(0.19 0.028 232);
+  --primary-deep: oklch(0.85 0.05 195);
+  --secondary: oklch(0.29 0.035 230);
+  --secondary-foreground: oklch(0.94 0.01 210);
+  --muted: oklch(0.28 0.03 230);
+  --muted-foreground: oklch(0.72 0.025 220);
+  --accent: oklch(0.34 0.05 205);
+  --accent-foreground: oklch(0.94 0.01 210);
+  --destructive: oklch(0.63 0.18 25);
+  --destructive-foreground: oklch(0.98 0.006 200);
+  --warning: oklch(0.78 0.14 72);
+  --warning-foreground: oklch(0.96 0.03 82);
+  --warning-surface: oklch(0.3 0.06 60);
+  --success: oklch(0.68 0.11 158);
+  --success-foreground: oklch(0.19 0.028 232);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.72 0.096 195);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
+  }
+}
+
+@utility bg-hero-gradient {
+  background-image: var(--gradient-hero);
+}
+
+@utility section-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
