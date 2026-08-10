@@ -237,43 +237,41 @@ function Inicio() {
           <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">
             Un entorno seguro, libre de daños y positivo
           </h2>
-          <div className="mt-6 grid gap-6 text-sm leading-relaxed text-muted-foreground lg:grid-cols-2">
-            <div className="space-y-4">
-              <p>
-                Todas las personas tienen derecho a desempeñar su trabajo o realizar actividades de
-                voluntariado en INPPARES en un entorno seguro, respetuoso y libre de cualquier forma
-                de violencia, abuso, explotación o daño físico, psicológico, económico o de otra
-                índole, que promueva su bienestar y desarrollo. Del mismo modo, las personas
-                beneficiarias y usuarias de los servicios de INPPARES tienen derecho a recibir
-                atención en un entorno seguro, donde sean tratadas con dignidad, respeto y sin
-                discriminación.
-              </p>
-              <p>
-                INPPARES está comprometido con la creación de este entorno y cultura; para sus
-                usuarias y usuarios, personal y cualquier otra persona que entre en contacto con la
-                organización, sin importar dónde se encuentre.
-              </p>
-              <p>
-                Para hacer realidad esta cultura, las personas que trabajan o realizan voluntariado
-                en INPPARES tienen la responsabilidad de comportarse adecuadamente en el trabajo.
-                Políticas como el Código de Conducta, la Política Antifraude, la Política de Respeto
-                en el Trabajo y la Política de Salvaguarda (Protección de Adultos Vulnerables y
-                Niños, Niñas y Adolescentes) explican claramente cómo debe ser un comportamiento
-                aceptable en el entorno laboral.
-              </p>
-              <p>
-                INPPARES está comprometido y es proactivo en la protección de sus finanzas y activos
-                relacionados y, para tal fin, tiene una respuesta de tolerancia cero ante las malas
-                prácticas financieras o administrativas. INPPARES cuenta con una Política Antifraude que brinda
-                claridad sobre este tema especializado.
-              </p>
-              <p>
-                A pesar de la existencia de un Código de Conducta claro, un compromiso
-                organizacional de tolerancia cero, la existencia de diversas políticas y
-                procedimientos relevantes y las mejores intenciones de todos, a veces las cosas
-                pueden salir mal.
-              </p>
-            </div>
+          <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            <p>
+              Todas las personas tienen derecho a desempeñar su trabajo o realizar actividades de
+              voluntariado en INPPARES en un entorno seguro, respetuoso y libre de cualquier forma
+              de violencia, abuso, explotación o daño físico, psicológico, económico o de otra
+              índole, que promueva su bienestar y desarrollo. Del mismo modo, las personas
+              beneficiarias y usuarias de los servicios de INPPARES tienen derecho a recibir
+              atención en un entorno seguro, donde sean tratadas con dignidad, respeto y sin
+              discriminación.
+            </p>
+            <p>
+              INPPARES está comprometido con la creación de este entorno y cultura; para sus
+              usuarias y usuarios, personal y cualquier otra persona que entre en contacto con la
+              organización, sin importar dónde se encuentre.
+            </p>
+            <p>
+              Para hacer realidad esta cultura, las personas que trabajan o realizan voluntariado
+              en INPPARES tienen la responsabilidad de comportarse adecuadamente en el trabajo.
+              Políticas como el Código de Conducta, la Política Antifraude, la Política de Respeto
+              en el Trabajo y la Política de Salvaguarda (Protección de Adultos Vulnerables y
+              Niños, Niñas y Adolescentes) explican claramente cómo debe ser un comportamiento
+              aceptable en el entorno laboral.
+            </p>
+            <p>
+              INPPARES está comprometido y es proactivo en la protección de sus finanzas y activos
+              relacionados y, para tal fin, tiene una respuesta de tolerancia cero ante las malas
+              prácticas financieras o administrativas. INPPARES cuenta con una Política Antifraude que brinda
+              claridad sobre este tema especializado.
+            </p>
+            <p>
+              A pesar de la existencia de un Código de Conducta claro, un compromiso
+              organizacional de tolerancia cero, la existencia de diversas políticas y
+              procedimientos relevantes y las mejores intenciones de todos, a veces las cosas
+              pueden salir mal.
+            </p>
           </div>
 
           <h3 className="mt-12 text-lg font-semibold">
