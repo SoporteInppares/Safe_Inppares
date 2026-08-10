@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { AlertTriangle, CheckCircle2, Copy, Plus, Send, Trash2, Upload } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Copy, Info, Plus, Send, Trash2, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -90,7 +90,7 @@ const TIPOS = [
   "Fuga de información confidencial o vulneración de datos personales.",
   "Alteración, falsificación o destrucción de registros, documentos o informes.",
   "Incumplimiento de normativa legal, del Reglamento Interno de Trabajo o de políticas internas.",
-  "Faltas administrativas en el trámite de procedimientos internos a cargo de autoridades o personal de INPPARES.",
+  "Faltas administrativas o financieras en el trámite de procedimientos internos a cargo de autoridades o personal de INPPARES.",
   "Discriminación por razones de género, raza, origen, orientación sexual, identidad de género, discapacidad, condición social, entre otras.",
   "Otros actos contrarios al Código de Ética de INPPARES.",
   "Otro (especifique)",
@@ -510,6 +510,13 @@ function FormularioDenuncia() {
                 />
               ) : null}
             </Pregunta>
+
+            <div className="flex items-start gap-3 rounded-xl border border-primary/25 bg-primary/5 p-4 text-xs leading-relaxed text-foreground sm:text-sm">
+              <Info className="mt-0.5 size-4 shrink-0 text-primary" />
+              <p>
+                A continuación, se señalan algunas características que <strong>no son obligatorias de contestar</strong>, pero que nos ayudarían a identificar casos adicionales de discriminación:
+              </p>
+            </div>
 
             <Pregunta titulo="Género con el que se identifica:">
               <OpcionesUnicas
