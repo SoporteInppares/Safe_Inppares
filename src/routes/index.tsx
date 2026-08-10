@@ -237,7 +237,7 @@ function Inicio() {
           <h2 className="mt-2 text-2xl font-semibold sm:text-3xl">
             Un entorno seguro, libre de daños y positivo
           </h2>
-          <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          <div className="mt-6 space-y-4 text-sm leading-relaxed text-muted-foreground text-justify sm:text-base">
             <p>
               Todas las personas tienen derecho a desempeñar su trabajo o realizar actividades de
               voluntariado en INPPARES en un entorno seguro, respetuoso y libre de cualquier forma
