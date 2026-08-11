@@ -110,14 +110,14 @@ function Inicio() {
               </p>
             </div>
 
-            <aside className="rounded-2xl border border-primary-foreground/25 bg-primary-foreground/10 p-6 shadow-elevated">
-              <p className="flex items-center gap-2 font-display text-sm font-semibold tracking-wide uppercase">
-                <AlertTriangle className="size-4" /> Aviso importante
+            <aside className="rounded-2xl border-l-4 border border-warning/50 bg-warning-surface p-6 shadow-card text-foreground">
+              <p className="flex items-center gap-2 font-display text-sm font-semibold tracking-wide uppercase text-warning-foreground">
+                <AlertTriangle className="size-4 shrink-0 text-warning" /> Aviso importante
               </p>
-              <p className="mt-4 text-sm leading-relaxed opacity-95">
-                Este sistema <strong>NO es un servicio de emergencia.</strong> Si usted o alguna persona se encuentra en peligro inminente o riesgo grave para la vida, la integridad física, la seguridad o la propiedad, comuníquese de inmediato con las autoridades locales
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Este sistema <strong className="text-foreground">NO es un servicio de emergencia.</strong> Si usted o alguna persona se encuentra en peligro inminente o riesgo grave para la vida, la integridad física, la seguridad o la propiedad, comuníquese de inmediato con las autoridades locales.
               </p>
-              <p className="mt-3 text-sm leading-relaxed opacity-95">
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Si usted o alguna persona se encuentra en peligro inminente o riesgo grave,
                 comuníquese de inmediato con las autoridades locales:
               </p>
@@ -125,16 +125,23 @@ function Inicio() {
                 {emergencias.map((e) => (
                   <li
                     key={e.numero}
-                    className="flex items-center justify-between gap-3 rounded-xl bg-primary-foreground/10 px-3 py-2.5 text-sm"
+                    className="rounded-xl border border-warning/30 bg-background/80 px-3 py-2.5 text-sm"
                   >
-                    <span className="flex items-center gap-2">
-                      <Phone className="size-4 shrink-0" /> {e.nombre}
-                    </span>
-                    <span className="font-display text-lg font-bold">{e.numero}</span>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="flex items-center gap-2 font-medium text-foreground">
+                        <Phone className="size-4 shrink-0 text-warning" /> {e.nombre}
+                      </span>
+                      <span className="font-display text-lg font-bold text-warning">{e.numero}</span>
+                    </div>
+                    {e.numero === "911" && (
+                      <p className="mt-1 text-xs italic text-muted-foreground">
+                        * Esta línea se encuentra en proceso de habilitación por parte del Estado.
+                      </p>
+                    )}
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs leading-relaxed opacity-80">
+              <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
                 Este canal está diseñado para reportar irregularidades, faltas éticas o actos de
                 corrupción en la institución que no constituyan una emergencia inminente.
               </p>
@@ -280,10 +287,20 @@ function Inicio() {
             exhaustiva, son ejemplos):
           </h3>
           <ul className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {temas.map((t) => (
-              <li key={t.titulo} className="rounded-2xl border bg-card p-5 shadow-card">
-                <p className="font-display font-semibold">{t.titulo}</p>
-                <p className="mt-2 text-sm text-muted-foreground">{t.detalle}</p>
+            {temas.map((t, i) => (
+              <li key={t.titulo} className="rounded-2xl border bg-card p-6 shadow-card">
+                <span
+                  className="block font-display text-xs font-bold tracking-wider select-none"
+                  style={{ color: "color-mix(in oklab, var(--primary) 60%, transparent)" }}
+                >
+                  0{i + 1}
+                </span>
+                <p className="mt-3 font-display text-base font-bold leading-snug text-foreground">
+                  {t.titulo}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {t.detalle}
+                </p>
               </li>
             ))}
           </ul>
