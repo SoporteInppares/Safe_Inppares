@@ -146,7 +146,7 @@ function Inicio() {
           <Accordion type="single" collapsible className="rounded-2xl border bg-card text-card-foreground shadow-card">
             <AccordionItem value="codigo-etica" className="px-5">
               <AccordionTrigger className="text-left font-display text-sm font-semibold">
-                Antes de realizar su denuncia, le invitamos a consultar nuestro Código de Ética
+                Antes de realizar su denuncia, le invitamos a consultar nuestro decálogo de Ética
               </AccordionTrigger>
               <AccordionContent className="pb-5">
                 {/* <p className="mb-4 text-sm">
