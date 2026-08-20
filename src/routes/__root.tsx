@@ -10,7 +10,6 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 
 
@@ -40,7 +39,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    console.error("Error no controlado en la aplicación", error);
   }, [error]);
 
   return (
@@ -95,8 +94,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "Canal de Denuncias Seguras INPPARES | SafeReport" },
       { name: "twitter:description", content: "Reporte de forma confidencial o anónima faltas éticas, acoso, discriminación o malas prácticas financieras en INPPARES. Disponible 24/7 en todo el Perú." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3d4255a3-7714-413f-a583-2fb8c7bfd8fb/id-preview-0821794c--e2c6f7be-77ac-4f3b-8240-bbbe0d5fbbfa.lovable.app-1785599210310.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3d4255a3-7714-413f-a583-2fb8c7bfd8fb/id-preview-0821794c--e2c6f7be-77ac-4f3b-8240-bbbe0d5fbbfa.lovable.app-1785599210310.png" },
     ],
     links: [
       {
@@ -146,4 +143,3 @@ function RootComponent() {
     </QueryClientProvider>
   );
 }
-

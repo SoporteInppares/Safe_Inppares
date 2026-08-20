@@ -16,7 +16,7 @@ import {
   OpcionesUnicas,
   Pregunta,
 } from "@/components/denuncia/fields";
-import { generarClave, guardarDenuncia } from "@/lib/denuncias-store";
+import { registrarDenuncia } from "@/lib/denuncias-api";
 
 export const Route = createFileRoute("/denuncia")({
   head: () => ({
@@ -248,9 +248,26 @@ function FormularioDenuncia() {
 
   const esAnonimo = anonimo === "Sí";
   const esGrupal = modalidad.startsWith("Grupal");
+  const solicitaMedidaProteccion = medidas.some((medida) => medida !== PROTECCION[0]);
 
   const toggle = (setter: (fn: (v: string[]) => string[]) => void) => (op: string) =>
     setter((prev) => (prev.includes(op) ? prev.filter((x) => x !== op) : [...prev, op]));
+
+  function toggleMedidaProteccion(opcion: string) {
+    if (opcion === PROTECCION[0]) {
+      setMedidasLaborales([]);
+      setMedidaLaboralOtra("");
+      setJustificacionMedidas("");
+      setMedidas((prev) => (prev.includes(opcion) ? [] : [opcion]));
+      return;
+    }
+    setMedidas((prev) => {
+      const sinOpcionNo = prev.filter((medida) => medida !== PROTECCION[0]);
+      return sinOpcionNo.includes(opcion)
+        ? sinOpcionNo.filter((medida) => medida !== opcion)
+        : [...sinOpcionNo, opcion];
+    });
+  }
 
   function onArchivos(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files ?? []);
@@ -293,7 +310,7 @@ function FormularioDenuncia() {
     return errs;
   }
 
-  function enviar(e: React.FormEvent) {
+  async function enviar(e: React.FormEvent) {
     e.preventDefault();
     const errs = validar();
     setErrores(errs);
@@ -302,23 +319,11 @@ function FormularioDenuncia() {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    const clave = generarClave();
-    guardarDenuncia({
-      clave,
+    try {
+      const respuesta = await registrarDenuncia({
       password,
-      createdAt: new Date().toISOString(),
-      estado: "Recibida",
       anonimo: esAnonimo,
       resumen: resumen.trim(),
-      archivos: archivos.map((a) => a.nombre),
-      mensajes: [
-        {
-          autor: "Comité de Ética — INPPARES",
-          fecha: new Date().toISOString(),
-          texto:
-            "Hemos recibido su denuncia. Será evaluada y asignada al Comité de Ética para su seguimiento. El contenido de su reporte solo se compartirá bajo estricta necesidad de saber.",
-        },
-      ],
       data: {
         anonimo,
         nombres,
@@ -369,9 +374,12 @@ function FormularioDenuncia() {
         detalleSugerencia,
         notificacion,
       },
-    });
-    setClaveGenerada(clave);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+      setClaveGenerada(respuesta.clave);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      toast.error("No fue posible registrar la denuncia. Intente nuevamente.");
+    }
   }
 
   if (claveGenerada) {
@@ -511,10 +519,10 @@ function FormularioDenuncia() {
               ) : null}
             </Pregunta>
 
-            <div className="flex items-start gap-3 rounded-xl border border-primary/25 bg-primary/5 p-4 text-xs leading-relaxed text-foreground sm:text-sm">
-              <Info className="mt-0.5 size-4 shrink-0 text-primary" />
+            <div className="flex items-start gap-3 rounded-2xl border border-warning/40 bg-warning-surface p-5 text-sm leading-relaxed text-warning-foreground">
+              <Info className="mt-0.5 size-5 shrink-0" />
               <p>
-                A continuación, se señalan algunas características que <strong>no son obligatorias de contestar</strong>, pero que nos ayudarían a identificar casos adicionales de discriminación:
+                A continuación, se señalan algunas características que <strong>no son obligatorias de contestar</strong>, pero que nos ayudarían a identificar casos adicionales de discriminación
               </p>
             </div>
 
@@ -964,7 +972,7 @@ function FormularioDenuncia() {
               <OpcionesMultiples
                 opciones={PROTECCION}
                 values={medidas}
-                onToggle={toggle(setMedidas as never)}
+                onToggle={toggleMedidaProteccion}
               />
               {medidas.includes("Sí, solicito medidas de protección laboral:") ? (
                 <div className="ml-0 space-y-3 rounded-xl border bg-secondary/30 p-4 sm:ml-6">
@@ -984,7 +992,7 @@ function FormularioDenuncia() {
                   ) : null}
                 </div>
               ) : null}
-              {medidas.length > 0 ? (
+              {solicitaMedidaProteccion ? (
                 <CampoTextarea
                   label="Si marcó alguna medida de protección, justifique brevemente su solicitud:"
                   value={justificacionMedidas}

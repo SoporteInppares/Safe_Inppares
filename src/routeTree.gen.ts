@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as DenunciaRouteImport } from './routes/denuncia'
 import { Route as SeguimientoRouteImport } from './routes/seguimiento'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DenunciaRoute = DenunciaRouteImport.update({
@@ -31,30 +37,34 @@ const SeguimientoRoute = SeguimientoRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/denuncia': typeof DenunciaRoute
   '/seguimiento': typeof SeguimientoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/denuncia': typeof DenunciaRoute
   '/seguimiento': typeof SeguimientoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/denuncia': typeof DenunciaRoute
   '/seguimiento': typeof SeguimientoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/denuncia' | '/seguimiento'
+  fullPaths: '/' | '/admin' | '/denuncia' | '/seguimiento'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/denuncia' | '/seguimiento'
-  id: '__root__' | '/' | '/denuncia' | '/seguimiento'
+  to: '/' | '/admin' | '/denuncia' | '/seguimiento'
+  id: '__root__' | '/' | '/admin' | '/denuncia' | '/seguimiento'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   DenunciaRoute: typeof DenunciaRoute
   SeguimientoRoute: typeof SeguimientoRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/denuncia': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   DenunciaRoute: DenunciaRoute,
   SeguimientoRoute: SeguimientoRoute,
 }

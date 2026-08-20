@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { SiteFooter, SiteHeader } from "@/components/site-chrome";
-import { buscarDenuncia, type Denuncia } from "@/lib/denuncias-store";
+import { consultarDenuncia, type DenunciaConsulta } from "@/lib/denuncias-api";
 
 export const Route = createFileRoute("/seguimiento")({
   head: () => ({
@@ -31,23 +31,21 @@ function Seguimiento() {
   const [clave, setClave] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [denuncia, setDenuncia] = useState<Denuncia | null>(null);
+  const [denuncia, setDenuncia] = useState<DenunciaConsulta | null>(null);
 
-  function ingresar(e: React.FormEvent) {
+  async function ingresar(e: React.FormEvent) {
     e.preventDefault();
     setError("");
     if (!clave.trim() || !password) {
       setError("Ingrese su Clave de la notificación y su Contraseña.");
       return;
     }
-    const found = buscarDenuncia(clave, password);
-    if (!found) {
-      setError(
-        "No encontramos una denuncia con esa Clave y Contraseña en este dispositivo. Verifique los datos ingresados.",
-      );
-      return;
+    try {
+      const found = await consultarDenuncia(clave, password);
+      setDenuncia(found);
+    } catch {
+      setError("No encontramos una denuncia con esa Clave y Contraseña. Verifique los datos ingresados.");
     }
-    setDenuncia(found);
   }
 
   return (
@@ -94,8 +92,8 @@ function Seguimiento() {
                 <KeyRound className="size-4" /> Acceder a mi denuncia
               </Button>
               <p className="text-xs leading-relaxed text-muted-foreground">
-                Nota: esta es una demostración de interfaz. Los reportes se guardan únicamente en
-                este navegador y son visibles solo desde el mismo dispositivo.
+                Sus datos se consultan de forma segura mediante la clave y contraseña que creó al
+                registrar la denuncia.
               </p>
             </form>
 

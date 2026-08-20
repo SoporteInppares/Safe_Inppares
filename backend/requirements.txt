@@ -1,0 +1,8 @@
+fastapi>=0.115,<1.0
+uvicorn[standard]>=0.30,<1.0
+sqlalchemy>=2.0,<3.0
+pyodbc>=5.1,<6.0
+# passlib 1.7.4 no es compatible con bcrypt 5.x; 4.3 funciona con Python 3.13.
+passlib[bcrypt]>=1.7,<2.0
+bcrypt==4.3.0
+pydantic-settings>=2.6,<3.0
